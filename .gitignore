@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+.venv/
+venv/
+
+# Large/reconstructable data
+data/original/*.csv
+data/pgcb/raw/
+
+# Model checkpoints
+checkpoints/
+*.pth
+*.pt
