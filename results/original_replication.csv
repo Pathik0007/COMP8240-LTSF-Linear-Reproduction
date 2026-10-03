@@ -1,0 +1,5 @@
+model,dataset,horizon,paper_mse,paper_mae,reproduced_mse,reproduced_mae
+DLinear,ETTh1,96,0.375,0.399,0.384144,0.404713
+DLinear,ETTh1,192,0.405,0.416,0.443487,0.449925
+DLinear,ETTh1,336,0.439,0.443,0.446925,0.448371
+DLinear,ETTh1,720,0.472,0.490,0.504245,0.514578

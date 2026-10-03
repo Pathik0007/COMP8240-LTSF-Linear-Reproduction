@@ -1,0 +1,5 @@
+model,dataset,horizon,paper_mse,paper_mae,reproduced_mse,reproduced_mae,mse_abs_diff,mae_abs_diff,mse_pct_diff,mae_pct_diff
+DLinear,ETTh1,96,0.375,0.399,0.384144,0.404713,0.009144,0.005713,2.44,1.43
+DLinear,ETTh1,192,0.405,0.416,0.443487,0.449925,0.038487,0.033925,9.50,8.16
+DLinear,ETTh1,336,0.439,0.443,0.446925,0.448371,0.007925,0.005371,1.81,1.21
+DLinear,ETTh1,720,0.472,0.490,0.504245,0.514578,0.032245,0.024578,6.83,5.02
