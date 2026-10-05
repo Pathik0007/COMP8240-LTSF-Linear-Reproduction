@@ -1,0 +1,75 @@
+FILE: data/pgcb/raw/PGCB_date_power_demand.xlsx
+SIZE_BYTES: 7121844
+
+SHEETS: ['Sheet1']
+
+================================================================================
+SHEET: Sheet1
+SHAPE: (92650, 15)
+ROWS: 92650
+COLUMNS: 15
+
+COLUMN NAMES:
+00: 'datetime'
+01: 'generation_mw'
+02: 'demand_mw'
+03: 'load_shedding'
+04: 'gas'
+05: 'liquid_fuel'
+06: 'coal'
+07: 'hydro'
+08: 'solar'
+09: 'wind'
+10: 'india_bheramara_hvdc'
+11: 'india_tripura'
+12: 'india_adani'
+13: 'nepal'
+14: 'remarks'
+
+DTYPES:
+datetime                datetime64[ns]
+generation_mw                  float64
+demand_mw                        int64
+load_shedding                    int64
+gas                              int64
+liquid_fuel                      int64
+coal                             int64
+hydro                            int64
+solar                          float64
+wind                           float64
+india_bheramara_hvdc             int64
+india_tripura                    int64
+india_adani                    float64
+nepal                          float64
+remarks                         object
+
+MISSING VALUES:
+datetime                    0
+generation_mw               0
+demand_mw                   0
+load_shedding               0
+gas                         0
+liquid_fuel                 0
+coal                        0
+hydro                       0
+solar                   22133
+wind                    73974
+india_bheramara_hvdc        0
+india_tripura               0
+india_adani             85312
+nepal                   87299
+remarks                 86257
+
+DUPLICATE FULL ROWS: 160
+
+FIRST 3 ROWS:
+             datetime  generation_mw  demand_mw  load_shedding   gas  liquid_fuel  coal  hydro  solar  wind  india_bheramara_hvdc  india_tripura  india_adani  nepal remarks
+0 2015-04-19 22:00:00         6323.0       6323              0     0            0     0      0    NaN   NaN                     0              0          NaN    NaN     NaN
+1 2015-04-19 21:00:00         6667.0       6667              0     0            0     0      0    NaN   NaN                     0              0          NaN    NaN     NaN
+2 2015-04-19 19:00:00         6897.0       6897              0  4415         1836   161     41    NaN   NaN                   444              0          NaN    NaN     NaN
+
+LAST 3 ROWS:
+                 datetime  generation_mw  demand_mw  load_shedding   gas  liquid_fuel  coal  hydro  solar  wind  india_bheramara_hvdc  india_tripura  india_adani  nepal remarks
+92647 2025-06-17 02:00:00        13719.0      13719              0  6340         1196  3881    172    0.0  27.0                   924             36       1105.0   38.0     NaN
+92648 2025-06-17 01:00:00        14093.0      14115             21  6323         1350  4019    172    0.0  28.0                   924             38       1201.0   38.0     NaN
+92649 2025-06-17 00:00:00        14628.0      14650             21  6302         1672  4186    172    0.0  41.0                   924             42       1251.0   38.0     NaN

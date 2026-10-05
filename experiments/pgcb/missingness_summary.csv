@@ -1,0 +1,16 @@
+column,missing_count,missing_percent
+datetime,0,0.0
+generation_mw,0,0.0
+demand_mw,0,0.0
+load_shedding,0,0.0
+gas,0,0.0
+liquid_fuel,0,0.0
+coal,0,0.0
+hydro,0,0.0
+solar,22133,23.888828926065838
+wind,73974,79.84241770102535
+india_bheramara_hvdc,0,0.0
+india_tripura,0,0.0
+india_adani,85312,92.07987048030222
+nepal,87299,94.22450080949811
+remarks,86257,93.09983810037777

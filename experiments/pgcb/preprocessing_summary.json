@@ -1,0 +1,117 @@
+{
+  "source_file": "data/pgcb/raw/PGCB_date_power_demand.xlsx",
+  "raw_rows": 92650,
+  "raw_columns": 15,
+  "raw_start": "2015-04-19 00:00:00",
+  "raw_end": "2025-06-17 12:00:00",
+  "minute_of_hour_counts": {
+    "0": 88469,
+    "30": 4181
+  },
+  "exact_hour_rows_retained": 88469,
+  "off_hour_rows_excluded": 4181,
+  "duplicate_timestamp_groups_exact_hour": 373,
+  "rows_in_duplicate_timestamp_groups": 796,
+  "unique_hourly_observations_after_collapse": 88046,
+  "full_hourly_grid_rows": 89101,
+  "missing_hours_after_reindex": 1055,
+  "observed_hour_coverage_percent": 98.81595043826668,
+  "core_features": [
+    "generation_mw",
+    "demand_mw",
+    "load_shedding",
+    "gas",
+    "liquid_fuel",
+    "coal",
+    "hydro",
+    "india_bheramara_hvdc",
+    "india_tripura"
+  ],
+  "structurally_partial_features_excluded_from_core": [
+    "solar",
+    "wind",
+    "india_adani",
+    "nepal"
+  ],
+  "duplicate_resolution": "median of numeric core variables at identical timestamps",
+  "missing_hour_policy": "preserved as missing; no interpolation performed",
+  "anomaly_policy": "values preserved; conservative 5x-q99 flags added only",
+  "scale_anomaly_summary": {
+    "generation_mw": {
+      "q99": 14430.100000000006,
+      "screening_upper_bound_5x_q99": 72150.50000000003,
+      "flagged_rows": 1
+    },
+    "demand_mw": {
+      "q99": 15087.70000000004,
+      "screening_upper_bound_5x_q99": 75438.5000000002,
+      "flagged_rows": 4
+    },
+    "load_shedding": {
+      "q99": 1531.550000000003,
+      "screening_upper_bound_5x_q99": 7657.750000000015,
+      "flagged_rows": 9
+    },
+    "gas": {
+      "q99": 7100.0,
+      "screening_upper_bound_5x_q99": 35500.0,
+      "flagged_rows": 17
+    },
+    "liquid_fuel": {
+      "q99": 4979.0,
+      "screening_upper_bound_5x_q99": 24895.0,
+      "flagged_rows": 13
+    },
+    "coal": {
+      "q99": 4553.550000000003,
+      "screening_upper_bound_5x_q99": 22767.750000000015,
+      "flagged_rows": 2
+    },
+    "hydro": {
+      "q99": 238.0,
+      "screening_upper_bound_5x_q99": 1190.0,
+      "flagged_rows": 20
+    },
+    "india_bheramara_hvdc": {
+      "q99": 953.0,
+      "screening_upper_bound_5x_q99": 4765.0,
+      "flagged_rows": 12
+    },
+    "india_tripura": {
+      "q99": 174.0,
+      "screening_upper_bound_5x_q99": 870.0,
+      "flagged_rows": 18
+    }
+  },
+  "total_rows_with_any_scale_anomaly": 95,
+  "structural_availability": {
+    "solar": {
+      "non_missing_rows": 70517,
+      "missing_rows": 22133,
+      "missing_percent": 23.888828926065838,
+      "first_non_missing_datetime": "2017-09-20 06:00:00",
+      "last_non_missing_datetime": "2025-06-17 12:00:00"
+    },
+    "wind": {
+      "non_missing_rows": 18676,
+      "missing_rows": 73974,
+      "missing_percent": 79.84241770102535,
+      "first_non_missing_datetime": "2023-05-13 12:00:00",
+      "last_non_missing_datetime": "2025-06-17 12:00:00"
+    },
+    "india_adani": {
+      "non_missing_rows": 7338,
+      "missing_rows": 85312,
+      "missing_percent": 92.07987048030222,
+      "first_non_missing_datetime": "2024-08-28 00:00:00",
+      "last_non_missing_datetime": "2025-06-17 12:00:00"
+    },
+    "nepal": {
+      "non_missing_rows": 5351,
+      "missing_rows": 87299,
+      "missing_percent": 94.22450080949811,
+      "first_non_missing_datetime": "2024-11-14 18:00:00",
+      "last_non_missing_datetime": "2025-06-17 12:00:00"
+    }
+  }
+}
