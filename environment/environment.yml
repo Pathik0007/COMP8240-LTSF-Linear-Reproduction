@@ -1,0 +1,11 @@
+name: comp8240-ltsf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pytorch=1.9.0
+  - pandas=1.3.5
+  - matplotlib=3.5.3
+  - numpy=1.21.6
+  - scikit-learn=1.0.2
+prefix: /Users/a123456/miniforge3/envs/comp8240-ltsf
