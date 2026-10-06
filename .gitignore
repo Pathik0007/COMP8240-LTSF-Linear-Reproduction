@@ -17,3 +17,7 @@ checkpoints/
 
 # Reconstructable processed PGCB data
 data/pgcb/processed/*.csv
+
+# Reconstructable synthetic datasets and row-level annotations
+data/synthetic/*.csv
+experiments/synthetic/annotations/*.csv

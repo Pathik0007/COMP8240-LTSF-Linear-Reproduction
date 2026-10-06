@@ -19,10 +19,10 @@ This project investigates:
 - [x] Official LTSF-Linear repository obtained and executed
 - [x] Canonical ETTh1 dataset obtained
 - [x] DLinear executed on ETTh1 for forecast horizons 96, 192, 336, and 720
-- [ ] Linear reproduced under matched ETTh1 settings
-- [ ] NLinear reproduced under matched ETTh1 settings
-- [ ] Primary external dataset prepared
-- [ ] Controlled synthetic dataset generated
+- [x] Linear reproduced under matched ETTh1 settings
+- [x] NLinear reproduced under matched ETTh1 settings
+- [x] Primary external dataset prepared
+- [x] Controlled synthetic dataset generated
 - [ ] New-data experiments completed
 
 ## Repository Structure
