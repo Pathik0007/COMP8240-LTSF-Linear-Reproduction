@@ -1,0 +1,23 @@
+NEW DATA PROGRESS SUMMARY
+================================================================================
+
+PGCB external dataset
+- raw_rows: 92650
+- exact_hour_rows_retained: 88469
+- off_hour_rows_excluded: 4181
+- duplicate_timestamp_groups_exact_hour: 373
+- missing_hours_after_reindex: 1055
+- observed_hour_coverage_percent: 98.815950
+- total_rows_with_any_scale_anomaly: 95
+
+Synthetic dataset
+- master_seed: 8240
+- rows_per_condition: 10000
+- channels: 4
+- conditions: stable, level_shift, regime_change, noise_medium, noise_high, outliers_low, outliers_high, nonlinear
+- stable_noise_rms: 0.149148
+- medium_noise_rms: 0.447444
+- high_noise_rms: 0.894887
+- low_outlier_cells: 114
+- high_outlier_cells: 410
+- audit_result: PASS

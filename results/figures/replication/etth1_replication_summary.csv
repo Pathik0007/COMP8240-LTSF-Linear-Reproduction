@@ -1,0 +1,4 @@
+model,mean_abs_mse_pct_diff,max_abs_mse_pct_diff,mean_abs_mae_pct_diff,max_abs_mae_pct_diff
+Linear,0.085,0.160,0.110,0.180
+NLinear,0.098,0.270,0.098,0.170
+DLinear,5.145,9.500,3.955,8.160
