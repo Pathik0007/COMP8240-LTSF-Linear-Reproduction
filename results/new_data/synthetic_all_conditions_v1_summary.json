@@ -1,0 +1,63 @@
+{
+  "conditions": [
+    {
+      "condition": "stable",
+      "best_trained_model": "DLinear",
+      "best_trained_native_mse": 0.024997143621899965,
+      "seasonal_native_mse": 0.04465655803562315,
+      "best_vs_seasonal_pct": 44.02357745091012
+    },
+    {
+      "condition": "level_shift",
+      "best_trained_model": "Linear",
+      "best_trained_native_mse": 0.473047257434533,
+      "seasonal_native_mse": 0.1004602366165915,
+      "best_vs_seasonal_pct": -370.8800948179401
+    },
+    {
+      "condition": "regime_change",
+      "best_trained_model": "Linear",
+      "best_trained_native_mse": 0.10529218320373973,
+      "seasonal_native_mse": 0.059862263843188726,
+      "best_vs_seasonal_pct": -75.89074726534943
+    },
+    {
+      "condition": "noise_medium",
+      "best_trained_model": "Linear",
+      "best_trained_native_mse": 0.20054371068591828,
+      "seasonal_native_mse": 0.39367265958953224,
+      "best_vs_seasonal_pct": 49.05825797122469
+    },
+    {
+      "condition": "noise_high",
+      "best_trained_model": "NLinear",
+      "best_trained_native_mse": 0.7997003126936825,
+      "seasonal_native_mse": 1.5715032788504482,
+      "best_vs_seasonal_pct": 49.11239935314282
+    },
+    {
+      "condition": "outliers_low",
+      "best_trained_model": "DLinear",
+      "best_trained_native_mse": 0.43539210337636275,
+      "seasonal_native_mse": 0.8584994200849468,
+      "best_vs_seasonal_pct": 49.28451980395263
+    },
+    {
+      "condition": "outliers_high",
+      "best_trained_model": "Linear",
+      "best_trained_native_mse": 1.3513607162324361,
+      "seasonal_native_mse": 2.6301605166476443,
+      "best_vs_seasonal_pct": 48.62059909731835
+    },
+    {
+      "condition": "nonlinear",
+      "best_trained_model": "DLinear",
+      "best_trained_native_mse": 0.03167277770183906,
+      "seasonal_native_mse": 0.05845897171720307,
+      "best_vs_seasonal_pct": 45.820501504786954
+    }
+  ],
+  "trained_runs_verified": 24,
+  "baseline_evaluations": 16,
+  "verification": "PASS"
+}

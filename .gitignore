@@ -21,3 +21,38 @@ data/pgcb/processed/*.csv
 # Reconstructable synthetic datasets and row-level annotations
 data/synthetic/*.csv
 experiments/synthetic/annotations/*.csv
+
+# Local research packaging, provisional notes and credentials
+*.zip
+*.tar.gz
+*.pptx
+*.docx
+*.key
+*.pem
+*.log.bak
+publication_kit_v1/
+.publication_backup/
+.env.*
+
+# Large models / experiment prediction arrays
+*.npz
+*.npy
+*.ckpt
+**/checkpoints/
+**/test_results/
+**/loss_plot*.png
+
+# Original source/data and private numerical gold manifest
+# The numerical gold case manifest is released only after the completed judge/annotation study.
+# Local provider logs may contain raw errors; review before publishing
+experiments/new_data/vlm_judge_v3/*errors.jsonl
+
+# Raw/readme-stale scratch content
+Archive.zip
+COMP8240_Ass2_montage.png
+README_NEXT_STEPS.md
+README_START_HERE.md
+README_HOSTED_API.md
+README_STEP14B.md
+README_VERIFIED_FIXES.md
+SHA256SUMS*.txt

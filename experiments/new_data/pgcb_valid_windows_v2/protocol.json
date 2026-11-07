@@ -1,0 +1,37 @@
+{
+  "official_source_sha": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+  "pgcb_sha256": "586478a14ee9d07aaa128f5c80387110deddac331f5ae53d0fea0e24e680ee94",
+  "features": [
+    "demand_mw",
+    "generation_mw"
+  ],
+  "n_grid_rows": 89101,
+  "valid_windows": {
+    "train": 19229,
+    "validation": 3083,
+    "test": 8050
+  },
+  "train_end_index": 62370,
+  "validation_end_index": 71281,
+  "train_only_scaler_mean": [
+    7758.6205437918725,
+    7758.976299574561
+  ],
+  "train_only_scaler_scale": [
+    2011.5902648560314,
+    2010.9079867447492
+  ],
+  "seq_len": 336,
+  "label_len": 48,
+  "pred_len": 96,
+  "seed": 2021,
+  "batch_size": 32,
+  "max_epochs": 10,
+  "early_stopping_patience": 3,
+  "learning_rate": 0.005,
+  "learning_rate_schedule": "original type1: epoch 1,2 at initial LR, halve every later epoch",
+  "feature_policy": "POST-HOC screening: demand and generation windows exclude missing/nonfinite, supplied scale flags, and BOTH channels outside heuristic 1000-30000 MW; sensitivity analysis, not validated physical thresholds",
+  "metric_policy": "all 2 channels plus primary demand and secondary generation in MW",
+  "torch": "1.9.0.post2",
+  "python": "3.9.19"
+}

@@ -1,0 +1,14 @@
+{
+  "source_sha": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+  "runner_sha256": "7519b8f95f06768da5f2faae5c10ae23855015df764298e79c7d85cd1396ab2b",
+  "model": "DLinear",
+  "dataset": "ETTh1",
+  "horizon": 192,
+  "seed": 2021,
+  "seq_len": 336,
+  "batch_size": 32,
+  "learning_rate": 0.005,
+  "seed_override": "fix_seed constant only",
+  "status": "PASS",
+  "return_code": 0
+}

@@ -1,0 +1,261 @@
+{
+  "by_condition": {
+    "level_shift": {
+      "cases": 6,
+      "mae_matches": 5,
+      "mae_rate": 0.833333,
+      "mse_matches": 4,
+      "mse_rate": 0.666667,
+      "reversal_consistency": 1.0,
+      "ties": 3
+    },
+    "noise_high": {
+      "cases": 6,
+      "mae_matches": 3,
+      "mae_rate": 0.5,
+      "mse_matches": 3,
+      "mse_rate": 0.5,
+      "reversal_consistency": 0.5,
+      "ties": 0
+    },
+    "noise_medium": {
+      "cases": 6,
+      "mae_matches": 5,
+      "mae_rate": 0.833333,
+      "mse_matches": 5,
+      "mse_rate": 0.833333,
+      "reversal_consistency": 0.833333,
+      "ties": 0
+    },
+    "nonlinear": {
+      "cases": 6,
+      "mae_matches": 3,
+      "mae_rate": 0.5,
+      "mse_matches": 3,
+      "mse_rate": 0.5,
+      "reversal_consistency": 0.5,
+      "ties": 3
+    },
+    "outliers_high": {
+      "cases": 6,
+      "mae_matches": 1,
+      "mae_rate": 0.166667,
+      "mse_matches": 4,
+      "mse_rate": 0.666667,
+      "reversal_consistency": 0.833333,
+      "ties": 4
+    },
+    "outliers_low": {
+      "cases": 6,
+      "mae_matches": 1,
+      "mae_rate": 0.166667,
+      "mse_matches": 1,
+      "mse_rate": 0.166667,
+      "reversal_consistency": 0.666667,
+      "ties": 4
+    },
+    "real_electricity_demand": {
+      "cases": 24,
+      "mae_matches": 13,
+      "mae_rate": 0.541667,
+      "mse_matches": 13,
+      "mse_rate": 0.541667,
+      "reversal_consistency": 0.75,
+      "ties": 4
+    },
+    "regime_change": {
+      "cases": 6,
+      "mae_matches": 6,
+      "mae_rate": 1.0,
+      "mse_matches": 5,
+      "mse_rate": 0.833333,
+      "reversal_consistency": 0.666667,
+      "ties": 0
+    },
+    "stable": {
+      "cases": 6,
+      "mae_matches": 2,
+      "mae_rate": 0.333333,
+      "mse_matches": 2,
+      "mse_rate": 0.333333,
+      "reversal_consistency": 1.0,
+      "ties": 4
+    }
+  },
+  "by_family": {
+    "pgcb": {
+      "cases": 24,
+      "mae_matches": 13,
+      "mae_rate": 0.541667,
+      "mse_matches": 13,
+      "mse_rate": 0.541667,
+      "reversal_consistency": 0.75,
+      "ties": 4
+    },
+    "synthetic": {
+      "cases": 48,
+      "mae_matches": 26,
+      "mae_rate": 0.541667,
+      "mse_matches": 27,
+      "mse_rate": 0.5625,
+      "reversal_consistency": 0.75,
+      "ties": 18
+    }
+  },
+  "by_pgcb_group": {
+    "group1": {
+      "cases": 12,
+      "mae_matches": 5,
+      "mae_rate": 0.416667,
+      "mse_matches": 4,
+      "mse_rate": 0.333333,
+      "reversal_consistency": 0.75,
+      "ties": 3
+    },
+    "group2": {
+      "cases": 12,
+      "mae_matches": 8,
+      "mae_rate": 0.666667,
+      "mse_matches": 9,
+      "mse_rate": 0.75,
+      "reversal_consistency": 0.75,
+      "ties": 1
+    }
+  },
+  "decisive_only_mae": {
+    "matches": 37,
+    "n": 49,
+    "rate": 0.755102,
+    "selection_warning": "Both reference and judge decisive; excludes ties and abstentions."
+  },
+  "human": {
+    "AI_assisted_excluded": 2,
+    "all_annotations": 24,
+    "independent_choice_distribution": {
+      "A": 8,
+      "B": 6,
+      "tie": 8
+    },
+    "independent_human_vs_claude": {
+      "matches": 14,
+      "n": 22,
+      "rate": 0.636364
+    },
+    "independent_human_vs_claude_kappa": 0.45679,
+    "independent_human_vs_mae": {
+      "matches": 12,
+      "n": 22,
+      "rate": 0.545455
+    },
+    "independent_human_vs_mae_kappa": 0.303797,
+    "independent_human_vs_mse": {
+      "matches": 12,
+      "n": 22,
+      "rate": 0.545455
+    },
+    "independent_human_vs_mse_kappa": 0.303797,
+    "independent_labels": 22,
+    "scope_warning": "One student rater; results are exploratory and not inter-human agreement."
+  },
+  "inference_panels": 144,
+  "limitations": [
+    "Cases are purposively selected and forecast windows overlap; descriptive, not independent random samples.",
+    "Cohen kappa describes chance-corrected agreement on these selected cases; it is not inter-human reliability.",
+    "Numerical reference label uses a 5% practical-tie threshold; it is not absolute ground truth for all judgments.",
+    "The two original human cases discussed with an AI assistant are excluded from strictly independent-human comparisons.",
+    "Two JSON parsing failures were recovered using a versioned larger-output runner; retain original failed-call logs."
+  ],
+  "numerical_mae_gold_distribution": {
+    "A": 57,
+    "B": 12,
+    "tie": 3
+  },
+  "numerical_mae_mse_gold_disagreements": 8,
+  "numerical_mse_gold_distribution": {
+    "A": 56,
+    "B": 10,
+    "tie": 6
+  },
+  "original_choice_distribution": {
+    "A": 28,
+    "B": 22,
+    "tie": 22
+  },
+  "original_comparisons": 72,
+  "original_mae_abstain_count": 0,
+  "original_mae_agreement": {
+    "matches": 39,
+    "n": 72,
+    "rate": 0.541667
+  },
+  "original_mae_cohens_kappa": 0.270718,
+  "original_mae_confusion": {
+    "A": {
+      "A": 28,
+      "B": 12,
+      "abstain": 0,
+      "tie": 17
+    },
+    "B": {
+      "A": 0,
+      "B": 9,
+      "abstain": 0,
+      "tie": 3
+    },
+    "tie": {
+      "A": 0,
+      "B": 1,
+      "abstain": 0,
+      "tie": 2
+    }
+  },
+  "original_mse_agreement": {
+    "matches": 40,
+    "n": 72,
+    "rate": 0.555556
+  },
+  "original_mse_cohens_kappa": 0.294118,
+  "original_mse_confusion": {
+    "A": {
+      "A": 27,
+      "B": 11,
+      "abstain": 0,
+      "tie": 18
+    },
+    "B": {
+      "A": 1,
+      "B": 9,
+      "abstain": 0,
+      "tie": 0
+    },
+    "tie": {
+      "A": 0,
+      "B": 2,
+      "abstain": 0,
+      "tie": 4
+    }
+  },
+  "position_consistency": {
+    "matches": 54,
+    "n": 72,
+    "rate": 0.75
+  },
+  "position_consistency_failures": 18,
+  "position_robust_mae_agreement": {
+    "matches": 36,
+    "n": 72,
+    "rate": 0.5
+  },
+  "position_robust_mse_agreement": {
+    "matches": 38,
+    "n": 72,
+    "rate": 0.527778
+  },
+  "prompt_sha256": "de14061b677b58b15140b215567900d66602f799de8b166f0ace6dc5985be3bc",
+  "protocol": "One reference-based comparison per original forecast window, with reversed A/B control",
+  "recorded_max_tokens_distribution": {
+    "1024": 2,
+    "256": 142
+  },
+  "served_model": "claude-sonnet-4-6"
+}

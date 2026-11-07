@@ -1,0 +1,385 @@
+{
+  "protocol": {
+    "tie_threshold_in_manifest": 0.05,
+    "human_rows_excluded_as_ai_assisted": [
+      "syn_regime_change_3_ab",
+      "pgcb_group2_10_ab"
+    ],
+    "note": "Descriptive statistics over selected, possibly overlapping windows. CIs: Wilson (panel level) and 5000x bootstrap clustered by base comparison."
+  },
+  "provenance": {
+    "cases": [
+      "experiments/new_data/vlm_judge_v3/cases.jsonl",
+      "56306b0d93724552fc8656bd94081d3f18f27fb6d34ce14b0534e1ff9530f5ac"
+    ],
+    "claude46": [
+      "experiments/new_data/vlm_judge_v3/claude46_judgments.jsonl",
+      "af0073c7062e136161756fb8dc59770ae11c835a7d1f50b63128939d21d53bab",
+      144,
+      [
+        "claude-sonnet-4-6"
+      ]
+    ],
+    "human:rater1": [
+      "experiments/new_data/vlm_judge_v3/human_annotations_rater1.csv",
+      "79bc7cad8542b19325c654bb49c2a96a162d3417a707e4e9be57ac03e311ae04",
+      22
+    ],
+    "human:rater1:batch2": [
+      "experiments/new_data/vlm_judge_v3/human_annotations_rater1_batch2.csv",
+      "b765157f28b4534cb28cf19b668a45e23f30ea845999af91b9d2f8249ef67b42",
+      48
+    ]
+  },
+  "judges": {
+    "claude46": {
+      "panels": 144,
+      "ab_panels": 72,
+      "choice_distribution_ab": {
+        "A": 28,
+        "tie": 22,
+        "B": 22
+      },
+      "gold_mae_distribution_ab": {
+        "A": 57,
+        "tie": 3,
+        "B": 12
+      },
+      "gold_mae_agreement_ab": {
+        "k": 39,
+        "n": 72,
+        "rate": 0.5417,
+        "wilson95": [
+          0.4274,
+          0.6517
+        ],
+        "cluster_boot95": [
+          0.4306,
+          0.6528
+        ]
+      },
+      "gold_mae_agreement_all_panels": {
+        "k": 88,
+        "n": 144,
+        "rate": 0.6111,
+        "wilson95": [
+          0.5296,
+          0.6869
+        ],
+        "cluster_boot95": [
+          0.5069,
+          0.7014
+        ]
+      },
+      "gold_mae_kappa_ab": {
+        "kappa": 0.2707,
+        "n": 72
+      },
+      "gold_mse_agreement_ab": {
+        "k": 40,
+        "n": 72,
+        "rate": 0.5556,
+        "wilson95": [
+          0.4409,
+          0.6646
+        ],
+        "cluster_boot95": [
+          0.4444,
+          0.6667
+        ]
+      },
+      "gold_mse_agreement_all_panels": {
+        "k": 90,
+        "n": 144,
+        "rate": 0.625,
+        "wilson95": [
+          0.5436,
+          0.6999
+        ],
+        "cluster_boot95": [
+          0.5278,
+          0.7222
+        ]
+      },
+      "gold_mse_kappa_ab": {
+        "kappa": 0.2941,
+        "n": 72
+      },
+      "decisive_only_mae_agreement_ab": {
+        "k": 37,
+        "n": 49,
+        "rate": 0.7551,
+        "wilson95": [
+          0.6191,
+          0.854
+        ]
+      },
+      "position_consistency": {
+        "k": 54,
+        "n": 72,
+        "rate": 0.75,
+        "wilson95": [
+          0.6391,
+          0.8356
+        ]
+      },
+      "position_robust_mae_accuracy": {
+        "k": 36,
+        "n": 72,
+        "rate": 0.5,
+        "wilson95": [
+          0.3875,
+          0.6125
+        ]
+      },
+      "first_slot_A_share_of_decisive": {
+        "k": 38,
+        "n": 100,
+        "rate": 0.38,
+        "wilson95": [
+          0.291,
+          0.4779
+        ]
+      },
+      "tie_threshold_sensitivity_ab": {
+        "0.00": {
+          "agreement": 0.5139,
+          "kappa": 0.2237,
+          "gold_ties": 0
+        },
+        "0.02": {
+          "agreement": 0.5139,
+          "kappa": 0.2237,
+          "gold_ties": 0
+        },
+        "0.05": {
+          "agreement": 0.5417,
+          "kappa": 0.2707,
+          "gold_ties": 3
+        },
+        "0.10": {
+          "agreement": 0.5694,
+          "kappa": 0.3199,
+          "gold_ties": 11
+        },
+        "0.20": {
+          "agreement": 0.5694,
+          "kappa": 0.3309,
+          "gold_ties": 21
+        }
+      },
+      "accuracy_by_relative_mae_gap_ab": {
+        "0%-5%": {
+          "n": 3,
+          "mae_agreement": 0.6667,
+          "judge_tie_rate": 0.6667
+        },
+        "5%-15%": {
+          "n": 11,
+          "mae_agreement": 0.2727,
+          "judge_tie_rate": 0.4545
+        },
+        "15%-30%": {
+          "n": 29,
+          "mae_agreement": 0.4138,
+          "judge_tie_rate": 0.3103
+        },
+        "30%-": {
+          "n": 29,
+          "mae_agreement": 0.7586,
+          "judge_tie_rate": 0.2069
+        }
+      },
+      "confidence_calibration_ab": {
+        "2": {
+          "n": 18,
+          "mae_agreement": 0.5556
+        },
+        "3": {
+          "n": 30,
+          "mae_agreement": 0.5
+        },
+        "4": {
+          "n": 20,
+          "mae_agreement": 0.5
+        },
+        "5": {
+          "n": 4,
+          "mae_agreement": 1.0
+        }
+      },
+      "by_family_ab": {
+        "pgcb": {
+          "k": 13,
+          "n": 24,
+          "rate": 0.5417,
+          "wilson95": [
+            0.3507,
+            0.7211
+          ]
+        },
+        "synthetic": {
+          "k": 26,
+          "n": 48,
+          "rate": 0.5417,
+          "wilson95": [
+            0.4029,
+            0.6742
+          ]
+        }
+      },
+      "by_condition_ab": {
+        "level_shift": {
+          "k": 5,
+          "n": 6,
+          "rate": 0.8333,
+          "wilson95": [
+            0.4365,
+            0.9699
+          ]
+        },
+        "noise_high": {
+          "k": 3,
+          "n": 6,
+          "rate": 0.5,
+          "wilson95": [
+            0.1876,
+            0.8124
+          ]
+        },
+        "noise_medium": {
+          "k": 5,
+          "n": 6,
+          "rate": 0.8333,
+          "wilson95": [
+            0.4365,
+            0.9699
+          ]
+        },
+        "nonlinear": {
+          "k": 3,
+          "n": 6,
+          "rate": 0.5,
+          "wilson95": [
+            0.1876,
+            0.8124
+          ]
+        },
+        "outliers_high": {
+          "k": 1,
+          "n": 6,
+          "rate": 0.1667,
+          "wilson95": [
+            0.0301,
+            0.5635
+          ]
+        },
+        "outliers_low": {
+          "k": 1,
+          "n": 6,
+          "rate": 0.1667,
+          "wilson95": [
+            0.0301,
+            0.5635
+          ]
+        },
+        "real_electricity_demand": {
+          "k": 13,
+          "n": 24,
+          "rate": 0.5417,
+          "wilson95": [
+            0.3507,
+            0.7211
+          ]
+        },
+        "regime_change": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "stable": {
+          "k": 2,
+          "n": 6,
+          "rate": 0.3333,
+          "wilson95": [
+            0.0968,
+            0.7
+          ]
+        }
+      }
+    }
+  },
+  "humans": {
+    "rater1": {
+      "labels": 70,
+      "ab_labels": 70,
+      "distribution": {
+        "tie": 39,
+        "B": 10,
+        "A": 21
+      },
+      "gold_mae_agreement": {
+        "k": 28,
+        "n": 70,
+        "rate": 0.4,
+        "wilson95": [
+          0.2933,
+          0.5171
+        ]
+      },
+      "gold_mae_kappa": {
+        "kappa": 0.1636,
+        "n": 70
+      },
+      "gold_mse_agreement": {
+        "k": 31,
+        "n": 70,
+        "rate": 0.4429,
+        "wilson95": [
+          0.3325,
+          0.5592
+        ]
+      },
+      "gold_mse_kappa": {
+        "kappa": 0.2062,
+        "n": 70
+      }
+    }
+  },
+  "pairwise_kappa_ab_panels": {
+    "gold_mae vs gold_mse": {
+      "kappa": 0.6893,
+      "n": 72,
+      "agreement": 0.8889
+    },
+    "gold_mae vs claude46": {
+      "kappa": 0.2707,
+      "n": 72,
+      "agreement": 0.5417
+    },
+    "gold_mae vs human:rater1": {
+      "kappa": 0.1636,
+      "n": 70,
+      "agreement": 0.4
+    },
+    "gold_mse vs claude46": {
+      "kappa": 0.2941,
+      "n": 72,
+      "agreement": 0.5556
+    },
+    "gold_mse vs human:rater1": {
+      "kappa": 0.2062,
+      "n": 70,
+      "agreement": 0.4429
+    },
+    "claude46 vs human:rater1": {
+      "kappa": 0.3331,
+      "n": 70,
+      "agreement": 0.5571
+    }
+  }
+}

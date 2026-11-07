@@ -1,0 +1,20 @@
+{
+  "v1_total_windows": 8801,
+  "v2_total_windows": 8050,
+  "common_windows": 8050,
+  "common_target_points": 772800,
+  "max_native_truth_difference_mw": 0.0008761434146435931,
+  "matched_window_first_index": 71075,
+  "matched_window_last_index": 88669,
+  "v1_protocol_sha256": "ccd8447a87611c8a5999d04b95af1c7203dbe13e87e25f7d4c46ce250f90b718",
+  "v2_protocol_sha256": "b3321d6556cecd6888d9c4601e1d5c3baba56ce639343d699fc7bc72f784c431",
+  "methods": [
+    "Linear",
+    "NLinear",
+    "DLinear",
+    "SeasonalNaive24",
+    "SeasonalNaive168"
+  ],
+  "warning": "Post-hoc screening and selected temporal windows; not independent trials or causal evidence.",
+  "comparison_csv": "results/new_data/pgcb_v1_v2_common_window_v1.csv"
+}

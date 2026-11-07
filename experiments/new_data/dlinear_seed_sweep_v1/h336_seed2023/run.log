@@ -1,0 +1,42 @@
+Args in experiment:
+Namespace(is_training=1, train_only=False, model_id='ETTh1_336_336_seed2023', model='DLinear', data='ETTh1', root_path='/Users/a123456/Documents/LTSF-Linear/dataset', data_path='ETTh1.csv', features='M', target='OT', freq='h', checkpoints='/Users/a123456/Documents/COMP8240-LTSF-Linear-Reproduction/experiments/new_data/dlinear_seed_sweep_v1/h336_seed2023/checkpoints', seq_len=336, label_len=48, pred_len=336, individual=False, embed_type=0, enc_in=7, dec_in=7, c_out=7, d_model=512, n_heads=8, e_layers=2, d_layers=1, d_ff=2048, moving_avg=25, factor=1, distil=True, dropout=0.05, embed='timeF', activation='gelu', output_attention=False, do_predict=False, num_workers=0, itr=1, train_epochs=10, batch_size=32, patience=3, learning_rate=0.005, des='COMP8240_SeedSweep', loss='mse', lradj='type1', use_amp=False, use_gpu=False, gpu=0, use_multi_gpu=False, devices='0,1,2,3', test_flop=False)
+Use CPU
+>>>>>>>start training : ETTh1_336_336_seed2023_DLinear_ETTh1_ftM_sl336_ll48_pl336_dm512_nh8_el2_dl1_df2048_fc1_ebtimeF_dtTrue_COMP8240_SeedSweep_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 7969
+val 2545
+test 2545
+	iters: 100, epoch: 1 | loss: 0.4614196
+	speed: 0.0072s/iter; left time: 17.3053s
+	iters: 200, epoch: 1 | loss: 0.4307321
+	speed: 0.0071s/iter; left time: 16.2803s
+Epoch: 1 cost time: 1.9125943183898926
+Epoch: 1, Steps: 249 | Train Loss: 0.5100036 Vali Loss: 1.0517764 Test Loss: 0.5272187
+Validation loss decreased (inf --> 1.051776).  Saving model ...
+Updating learning rate to 0.005
+	iters: 100, epoch: 2 | loss: 0.4736707
+	speed: 0.0200s/iter; left time: 42.7389s
+	iters: 200, epoch: 2 | loss: 0.4706527
+	speed: 0.0089s/iter; left time: 18.0801s
+Epoch: 2 cost time: 2.1351113319396973
+Epoch: 2, Steps: 249 | Train Loss: 0.4863044 Vali Loss: 1.1743436 Test Loss: 0.4867154
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 0.0025
+	iters: 100, epoch: 3 | loss: 0.4392799
+	speed: 0.0187s/iter; left time: 35.4270s
+	iters: 200, epoch: 3 | loss: 0.4779555
+	speed: 0.0073s/iter; left time: 13.0834s
+Epoch: 3 cost time: 1.9134469032287598
+Epoch: 3, Steps: 249 | Train Loss: 0.4609337 Vali Loss: 1.1442605 Test Loss: 0.4551370
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 0.00125
+	iters: 100, epoch: 4 | loss: 0.5302287
+	speed: 0.0162s/iter; left time: 26.6424s
+	iters: 200, epoch: 4 | loss: 0.4572499
+	speed: 0.0088s/iter; left time: 13.5871s
+Epoch: 4 cost time: 1.9947311878204346
+Epoch: 4, Steps: 249 | Train Loss: 0.4466778 Vali Loss: 1.0687371 Test Loss: 0.4508010
+EarlyStopping counter: 3 out of 3
+Early stopping
+>>>>>>>testing : ETTh1_336_336_seed2023_DLinear_ETTh1_ftM_sl336_ll48_pl336_dm512_nh8_el2_dl1_df2048_fc1_ebtimeF_dtTrue_COMP8240_SeedSweep_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2545
+mse:0.5273921489715576, mae:0.5161478519439697

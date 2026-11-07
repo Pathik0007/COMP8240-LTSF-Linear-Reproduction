@@ -1,0 +1,66 @@
+{
+  "base_cases_in_manifest": 72,
+  "all_panels_in_manifest": 144,
+  "judge_outputs_received": 144,
+  "original_cases_received": 72,
+  "original_valid_json": 72,
+  "invalid_original": 0,
+  "original_decisions": {
+    "A": 28,
+    "tie": 22,
+    "B": 22
+  },
+  "original_mae_agreement_including_ties": 0.5416666666666666,
+  "original_mse_agreement_including_ties": 0.5555555555555556,
+  "definitive_mae_eligible_cases": 49,
+  "definitive_mae_agreement": 0.7551020408163265,
+  "position_consistency_n": 72,
+  "position_consistency_rate": 0.75,
+  "by_condition": {
+    "level_shift": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.8333333333333334,
+      "mse_agreement_rate": 0.6666666666666666
+    },
+    "noise_high": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.5,
+      "mse_agreement_rate": 0.5
+    },
+    "noise_medium": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.8333333333333334,
+      "mse_agreement_rate": 0.8333333333333334
+    },
+    "nonlinear": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.5,
+      "mse_agreement_rate": 0.5
+    },
+    "outliers_high": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.16666666666666666,
+      "mse_agreement_rate": 0.6666666666666666
+    },
+    "outliers_low": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.16666666666666666,
+      "mse_agreement_rate": 0.16666666666666666
+    },
+    "real_electricity_demand": {
+      "valid_original": 24,
+      "mae_agreement_rate": 0.5416666666666666,
+      "mse_agreement_rate": 0.5416666666666666
+    },
+    "regime_change": {
+      "valid_original": 6,
+      "mae_agreement_rate": 1.0,
+      "mse_agreement_rate": 0.8333333333333334
+    },
+    "stable": {
+      "valid_original": 6,
+      "mae_agreement_rate": 0.3333333333333333,
+      "mse_agreement_rate": 0.3333333333333333
+    }
+  }
+}

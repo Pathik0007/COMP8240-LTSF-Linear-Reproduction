@@ -1,0 +1,74 @@
+Args in experiment:
+Namespace(is_training=1, train_only=False, model_id='ETTh1_336_720_seed2023', model='DLinear', data='ETTh1', root_path='/Users/a123456/Documents/LTSF-Linear/dataset', data_path='ETTh1.csv', features='M', target='OT', freq='h', checkpoints='/Users/a123456/Documents/COMP8240-LTSF-Linear-Reproduction/experiments/new_data/dlinear_seed_sweep_v1/h720_seed2023/checkpoints', seq_len=336, label_len=48, pred_len=720, individual=False, embed_type=0, enc_in=7, dec_in=7, c_out=7, d_model=512, n_heads=8, e_layers=2, d_layers=1, d_ff=2048, moving_avg=25, factor=1, distil=True, dropout=0.05, embed='timeF', activation='gelu', output_attention=False, do_predict=False, num_workers=0, itr=1, train_epochs=10, batch_size=32, patience=3, learning_rate=0.005, des='COMP8240_SeedSweep', loss='mse', lradj='type1', use_amp=False, use_gpu=False, gpu=0, use_multi_gpu=False, devices='0,1,2,3', test_flop=False)
+Use CPU
+>>>>>>>start training : ETTh1_336_720_seed2023_DLinear_ETTh1_ftM_sl336_ll48_pl720_dm512_nh8_el2_dl1_df2048_fc1_ebtimeF_dtTrue_COMP8240_SeedSweep_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 7585
+val 2161
+test 2161
+	iters: 100, epoch: 1 | loss: 0.5606877
+	speed: 0.0102s/iter; left time: 23.1992s
+	iters: 200, epoch: 1 | loss: 0.5474135
+	speed: 0.0096s/iter; left time: 20.8959s
+Epoch: 1 cost time: 2.3438241481781006
+Epoch: 1, Steps: 237 | Train Loss: 0.5904490 Vali Loss: 1.3485996 Test Loss: 0.5201881
+Validation loss decreased (inf --> 1.348600).  Saving model ...
+Updating learning rate to 0.005
+	iters: 100, epoch: 2 | loss: 0.5740291
+	speed: 0.0190s/iter; left time: 38.5993s
+	iters: 200, epoch: 2 | loss: 0.5343733
+	speed: 0.0097s/iter; left time: 18.6868s
+Epoch: 2 cost time: 2.3054251670837402
+Epoch: 2, Steps: 237 | Train Loss: 0.5670709 Vali Loss: 1.2715055 Test Loss: 0.5354373
+Validation loss decreased (1.348600 --> 1.271505).  Saving model ...
+Updating learning rate to 0.0025
+	iters: 100, epoch: 3 | loss: 0.5922140
+	speed: 0.0185s/iter; left time: 33.2883s
+	iters: 200, epoch: 3 | loss: 0.5430380
+	speed: 0.0112s/iter; left time: 19.0380s
+Epoch: 3 cost time: 2.406856060028076
+Epoch: 3, Steps: 237 | Train Loss: 0.5389563 Vali Loss: 1.2710979 Test Loss: 0.4895673
+Validation loss decreased (1.271505 --> 1.271098).  Saving model ...
+Updating learning rate to 0.00125
+	iters: 100, epoch: 4 | loss: 0.5430027
+	speed: 0.0191s/iter; left time: 29.8202s
+	iters: 200, epoch: 4 | loss: 0.6342484
+	speed: 0.0099s/iter; left time: 14.4873s
+Epoch: 4 cost time: 2.326023817062378
+Epoch: 4, Steps: 237 | Train Loss: 0.5253777 Vali Loss: 1.2396294 Test Loss: 0.4795691
+Validation loss decreased (1.271098 --> 1.239629).  Saving model ...
+Updating learning rate to 0.000625
+	iters: 100, epoch: 5 | loss: 0.5268686
+	speed: 0.0196s/iter; left time: 25.9718s
+	iters: 200, epoch: 5 | loss: 0.5432523
+	speed: 0.0100s/iter; left time: 12.2492s
+Epoch: 5 cost time: 2.3879148960113525
+Epoch: 5, Steps: 237 | Train Loss: 0.5187459 Vali Loss: 1.1979270 Test Loss: 0.4927331
+Validation loss decreased (1.239629 --> 1.197927).  Saving model ...
+Updating learning rate to 0.0003125
+	iters: 100, epoch: 6 | loss: 0.4917504
+	speed: 0.0194s/iter; left time: 21.0325s
+	iters: 200, epoch: 6 | loss: 0.5613007
+	speed: 0.0095s/iter; left time: 9.3337s
+Epoch: 6 cost time: 2.2469213008880615
+Epoch: 6, Steps: 237 | Train Loss: 0.5152184 Vali Loss: 1.2391167 Test Loss: 0.4728664
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 0.00015625
+	iters: 100, epoch: 7 | loss: 0.5046940
+	speed: 0.0190s/iter; left time: 16.1002s
+	iters: 200, epoch: 7 | loss: 0.4837124
+	speed: 0.0093s/iter; left time: 6.9418s
+Epoch: 7 cost time: 2.229313850402832
+Epoch: 7, Steps: 237 | Train Loss: 0.5128380 Vali Loss: 1.2128725 Test Loss: 0.4765377
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 7.8125e-05
+	iters: 100, epoch: 8 | loss: 0.5559493
+	speed: 0.0185s/iter; left time: 11.3439s
+	iters: 200, epoch: 8 | loss: 0.4451650
+	speed: 0.0112s/iter; left time: 5.7166s
+Epoch: 8 cost time: 2.57059907913208
+Epoch: 8, Steps: 237 | Train Loss: 0.5115482 Vali Loss: 1.2352659 Test Loss: 0.4662115
+EarlyStopping counter: 3 out of 3
+Early stopping
+>>>>>>>testing : ETTh1_336_720_seed2023_DLinear_ETTh1_ftM_sl336_ll48_pl720_dm512_nh8_el2_dl1_df2048_fc1_ebtimeF_dtTrue_COMP8240_SeedSweep_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2161
+mse:0.491901159286499, mae:0.5041362047195435
