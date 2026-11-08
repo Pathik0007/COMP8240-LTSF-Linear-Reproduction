@@ -35,3 +35,21 @@ conda run --no-capture-output -n comp8240-ltsf python tools/vlm_judge/analyze_ju
 `cases.jsonl` is the **post-judging numerical gold manifest**; keep it hidden from any future blinded rater or judge until their annotations are final. `public_cases.jsonl` is the blinded input. The gold case manifest and anonymised charts can be published after the completed annotations; never expose gold labels to a judge or annotator before their decision. Confirm redistribution and privacy implications before publication.
 
 For any new API runs: obtain the image inputs, supply your own provider key through an environment variable, use `--dry-run` and a small `--limit` pilot, and monitor provider billing. Do **not** commit keys, `.env` files or billing records. The existing results can be analysed without further API calls.
+
+
+## Historical API evidence and cost scope
+
+The completed study has 144 valid final responses in
+`experiments/new_data/vlm_judge_v3/claude46_judgments.jsonl`.
+
+Recorded output-token limits were 256 for 142 valid responses and
+1,024 for two recovered responses. The existing failure log,
+`experiments/new_data/vlm_judge_v3/claude46_judgments_errors.jsonl`,
+records six parsing failures across four image presentations.
+
+The sum of estimated costs recorded for the 144 valid responses is
+US$0.68568. Historical failed-response token usage was not recorded,
+so this is not a verified total charge for every attempted request.
+
+These historical responses and annotations are preserved unchanged.
+Offline statistical verification requires no provider key or new API calls.
