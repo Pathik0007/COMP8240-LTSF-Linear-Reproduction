@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 ALLOWED_EXACT={
+  'experiments/original_etth1/run_linear_nlinear_etth1.sh',
+  'environment/environment_notes.md',
   'environment/environment.yml',
   'data/README.md',
   'experiments/new_data/vlm_judge_v3/claude46_judgments_errors.jsonl',

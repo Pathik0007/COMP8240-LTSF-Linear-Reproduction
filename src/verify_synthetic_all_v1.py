@@ -1,4 +1,5 @@
 from pathlib import Path
+import argparse
 import csv
 import json
 import re
@@ -6,8 +7,18 @@ import sys
 
 import numpy as np
 
+parser = argparse.ArgumentParser(description="Verify all eight synthetic conditions without overwriting published results")
+parser.add_argument("--official", type=Path, default=Path.home() / "Documents/LTSF-Linear")
+parser.add_argument("--run-root", type=Path, help="Uniform condition/model tree from the rerun driver")
+parser.add_argument("--output-dir", type=Path)
+args = parser.parse_args()
 PROJECT = Path(__file__).resolve().parents[1]
-OFFICIAL = Path.home() / "Documents/LTSF-Linear"
+OFFICIAL = args.official.resolve()
+RUN_ROOT = args.run_root.resolve() if args.run_root else None
+OUTPUT_DIR = args.output_dir.resolve() if args.output_dir else PROJECT / "experiments/reruns/synthetic_verification"
+for filename in ("synthetic_all_conditions_v1_metrics.csv", "synthetic_all_conditions_v1_summary.json"):
+    if (OUTPUT_DIR / filename).exists():
+        raise RuntimeError("Existing verification preserved; choose a fresh output directory")
 sys.path.insert(0, str(OFFICIAL))
 
 from data_provider.data_loader import Dataset_Custom
@@ -27,6 +38,8 @@ SEQ_LEN = 336
 PRED_LEN = 96
 
 def get_run_dir(condition, model):
+    if RUN_ROOT is not None:
+        return RUN_ROOT / condition / model
     base = PROJECT / "experiments/new_data"
     if condition == "stable":
         if model == "DLinear":
@@ -174,7 +187,7 @@ for condition in CONDITIONS:
 if len(rows) != 40:
     raise RuntimeError(f"Expected 40 rows, got {len(rows)}")
 
-out_dir = PROJECT / "results/new_data"
+out_dir = OUTPUT_DIR
 out_dir.mkdir(parents=True, exist_ok=True)
 
 csv_path = out_dir / "synthetic_all_conditions_v1_metrics.csv"

@@ -59,3 +59,6 @@ SHA256SUMS*.txt
 
 # Reviewed historical Claude parsing-failure evidence
 !experiments/new_data/vlm_judge_v3/claude46_judgments_errors.jsonl
+
+# Separate reproduction outputs
+experiments/reruns/

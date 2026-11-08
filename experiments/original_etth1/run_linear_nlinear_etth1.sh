@@ -3,7 +3,7 @@ set -euo pipefail
 
 OFFICIAL_REPO="${OFFICIAL_REPO:-$HOME/Documents/LTSF-Linear}"
 PROJECT_REPO="${PROJECT_REPO:-$HOME/Documents/COMP8240-LTSF-Linear-Reproduction}"
-LOG_DIR="$PROJECT_REPO/experiments/original_etth1/logs"
+LOG_DIR="${LOG_DIR:-$PROJECT_REPO/experiments/reruns/original_etth1}"
 
 EXPECTED_COMMIT="0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6"
 EXPECTED_DATA_HASH="f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066"
@@ -27,16 +27,24 @@ for MODEL in Linear NLinear; do
     for HORIZON in 96 192 336 720; do
 
         MODEL_LOWER="$(printf '%s' "$MODEL" | tr '[:upper:]' '[:lower:]')"
-        LOG="$LOG_DIR/${MODEL_LOWER}_etth1_h${HORIZON}_mac_arm64.log"
+        RUN_DIR="$LOG_DIR/${MODEL_LOWER}_h${HORIZON}"
+        if [[ -e "$RUN_DIR" ]]; then
+            echo "STOP: Existing run preserved: $RUN_DIR"
+            exit 1
+        fi
+        mkdir -p "$RUN_DIR"
+        LOG="$RUN_DIR/run.log"
 
         echo "============================================================"
         echo "Running model=$MODEL horizon=$HORIZON"
         echo "Log: $LOG"
         echo "============================================================"
 
-        python -u run_longExp.py \
+        (
+        cd "$RUN_DIR"
+        python -u "$OFFICIAL_REPO/run_longExp.py" \
           --is_training 1 \
-          --root_path ./dataset/ \
+          --root_path "$OFFICIAL_REPO/dataset/" \
           --data_path ETTh1.csv \
           --model_id "ETTh1_336_${HORIZON}" \
           --model "$MODEL" \
@@ -56,7 +64,9 @@ for MODEL in Linear NLinear; do
           --patience 3 \
           --learning_rate 0.005 \
           --num_workers 0 \
+          --checkpoints "$RUN_DIR/checkpoints" \
           2>&1 | tee "$LOG"
+        )
 
         echo
         grep -Ei 'mse:.*mae:|mae:.*mse:' "$LOG" || {

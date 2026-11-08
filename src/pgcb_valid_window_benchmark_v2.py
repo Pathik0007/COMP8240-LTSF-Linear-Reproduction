@@ -228,6 +228,7 @@ def main():
     parser.add_argument('--official', type=Path,
                         default=Path.home() / 'Documents/LTSF-Linear')
     parser.add_argument('--audit-only', action='store_true')
+    parser.add_argument('--output-dir', type=Path, help='Fresh run directory; summary is written here as metrics.csv')
     args = parser.parse_args()
     project, official = args.project.resolve(), args.official.resolve()
     sha = assert_source(official)
@@ -236,7 +237,7 @@ def main():
     starts, trainend, valend = find_starts(valid, len(df), SEQ_LEN, PRED_LEN)
     print('=== PGCB COMPLETE-WINDOW AUDIT ===')
     print('Source commit:', sha)
-    print('Raw SHA256:', digest(raw_path))
+    print('Processed input SHA256:', digest(raw_path))
     print('Grid rows:', len(df), 'complete observed rows:', valid.sum())
     for split in ('train', 'validation', 'test'):
         print(split, 'valid windows:', len(starts[split]))
@@ -246,7 +247,9 @@ def main():
     scaler = StandardScaler().fit(raw[:trainend][valid[:trainend]])
     scaled = ((raw - scaler.mean_) / scaler.scale_).astype(np.float32)
     print('V2 test windows (screened):', len(starts['test']))
-    out = project / 'experiments/new_data/pgcb_valid_windows_v2'
+    out = args.output_dir.resolve() if args.output_dir else project / 'experiments/reruns/pgcb_v2'
+    if out.exists() and any(out.iterdir()):
+        raise RuntimeError('Output directory is not empty; choose a fresh path: ' + str(out))
     out.mkdir(parents=True, exist_ok=True)
     config_path = out / 'protocol.json'
     if config_path.exists():
@@ -287,7 +290,7 @@ def main():
         vals.update({'model': name, 'best_epoch': '', 'validation_mse_scaled': '',
                      'training_seconds': 0.0})
         all_scores.append(vals)
-    csv_path = project / 'results/new_data/pgcb_valid_windows_v2_metrics.csv'
+    csv_path = out / 'metrics.csv'
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open('w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=list(all_scores[0].keys()))

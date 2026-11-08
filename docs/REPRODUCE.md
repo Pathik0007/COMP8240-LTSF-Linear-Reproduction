@@ -1,4 +1,4 @@
-# Reproduce and audit the COMP8240 project
+# Reproduce and audit the project
 
 ## Quick offline verification
 
@@ -6,57 +6,142 @@ From the repository root:
 
     python3 tools/verify_submission.py
 
-This uses standard-library Python to recompute every statistical field in the
-final judge summary from committed cases, responses and both annotation batches.
-The two assisted labels are excluded. Machine-specific provenance is excluded
-from the equality check. Temporary outputs are removed automatically.
+Expected: JUDGE STATISTICS: EXACT MATCH.
+This recomputes every statistical field from saved cases, responses and both
+human batches, excluding the two assisted labels. Machine-specific provenance
+is excluded from equality. Temporary outputs are removed automatically.
+No API calls, training, external datasets or Conda environment are needed.
 
-No Conda environment, external dataset or API key is needed for this check.
-Forecasting stages below have separate data and training dependencies.
-The portable environment YAML omits the original installation prefix and includes
-the Excel reader. Historical platform exports remain original runtime evidence.
+## Forecasting prerequisites
 
-## Prerequisites
+Run commands below from the project root. The historical training environment
+is named comp8240-ltsf. Install the workbook dependency there if needed:
 
-1. Obtain the original [LTSF-Linear repository](https://github.com/cure-lab/LTSF-Linear) into `~/Documents/LTSF-Linear`, checkout commit **`0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6`**, and place `ETTh1.csv` at `~/Documents/LTSF-Linear/dataset/ETTh1.csv`. The project code checks this revision for several experiments.
-2. Clone this repository at `~/Documents/COMP8240-LTSF-Linear-Reproduction` on macOS, or adjust the absolute default paths/CLI flags in the documented scripts.
-3. Use a Conda environment called `comp8240-ltsf` with **Python 3.9.19, PyTorch 1.9.0.post2, NumPy 1.21.6 and pandas 1.3.5**, plus scikit-learn, matplotlib and openpyxl as required. The historical environment may need compatible system packages. Verify installed versions before trying to reproduce metric values.
-4. For PGCB, obtain the source workbook from its rightful publisher and place it at `data/pgcb/raw/PGCB_date_power_demand.xlsx`; original raw workbook and any redistribution rights are **not supplied** here. Run preprocessing from the project root to create `data/pgcb/processed/pgcb_hourly_core_audited.csv`.
+    conda run -n comp8240-ltsf python -m pip install -r environment/pip-requirements.txt
 
-## Reproduce or audit stages
+For a new environment, environment/environment.yml is the portable starting
+specification. See environment/environment_notes.md and preserved exports for
+the distinct Mac and Kaggle runtimes. Different platforms/package builds may
+produce different results.
 
-```bash
-# No GPU/API calls; code test using synthetic fixtures
-conda run --no-capture-output -n comp8240-ltsf python -m unittest discover -s tests -p test_verified_fixes_v1.py -v
+For the historical CPU setting, disable CUDA before optional training:
 
-# Original source preconditions and controlled DLinear seed-run plan, no training
-conda run --no-capture-output -n comp8240-ltsf python tools/run_dlinear_seed_sweep_v1.py --seeds 2021,2022,2023 --horizons 96,192,336,720 --dry-run
+    export CUDA_VISIBLE_DEVICES=""
 
-# Generate and audit eight controlled synthetic datasets
-conda run --no-capture-output -n comp8240-ltsf python src/generate_synthetic.py
-conda run --no-capture-output -n comp8240-ltsf python src/audit_synthetic.py
+Use a separate clean official checkout at the pinned revision:
 
-# Prepare PGCB from separately acquired source workbook
-conda run --no-capture-output -n comp8240-ltsf python src/preprocess_pgcb.py
+    git clone https://github.com/cure-lab/LTSF-Linear.git "$HOME/Documents/LTSF-Linear"
+    git -C "$HOME/Documents/LTSF-Linear" checkout 0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6
 
-# No training: inspect screened PGCB windows
-conda run --no-capture-output -n comp8240-ltsf python src/pgcb_valid_window_benchmark_v2.py --audit-only
+Reuse an existing clean checkout at that revision instead of cloning again.
+Place canonical ETTh1.csv in its dataset directory.
+Source: https://github.com/zhouhaoyi/ETDataset/tree/main/ETT-small.
+Expected ETTh1 SHA-256:
+f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066.
 
-# Offline forecast-judge analysis from saved cases and responses
-conda run --no-capture-output -n comp8240-ltsf python tools/vlm_judge/analyze_judge_v3.py \
-  --cases experiments/new_data/vlm_judge_v3/cases.jsonl \
-  --judge claude46=experiments/new_data/vlm_judge_v3/claude46_judgments.jsonl \
-  --human rater1=experiments/new_data/vlm_judge_v3/human_annotations_rater1.csv \
-  --human rater1:batch2=experiments/new_data/vlm_judge_v3/human_annotations_rater1_batch2.csv \
-  --human-skip-first 2 --out-prefix results/new_data/judge_study_v3
-```
+PGCB source: https://doi.org/10.24432/C59P6V (UCI 1175; CC BY 4.0).
+Download PGCB_date_power_demand.xlsx into data/pgcb/raw/.
+Expected workbook SHA-256:
+cd10a95b98033594b70ff176d69e9feaa2ade5f43b8ae4e5640a0f9deabc9da1.
+The workbook hash differs from the processed-input hash recorded by training.
 
-The complete CPU synthetic benchmark is orchestrated by `src/run_synthetic_family_v1.sh` for seven conditions; the stable condition is in earlier scripts. Run only if the complete input datasets and official source checkout exist. **Historical outputs are preserved by the scripts: a completed run will generally not be overwritten.** The DLinear seed sweep similarly refuses existing output folders. Do not rerun all jobs without a clean, separately versioned output destination.
+Prepare local data in the training environment:
 
-The PGCB v1/v2 training commands are `python src/pgcb_valid_window_benchmark_v1.py` and `python src/pgcb_valid_window_benchmark_v2.py` from the project root in the pinned environment; each requires the processed workbook above and writes results plus large local prediction `.npz` files. Matched-window comparison uses `python src/compare_pgcb_v1_v2.py` after both are complete. The public small summary files are sufficient to *inspect* the reported results but are not sufficient to recompute every prediction-level PGCB metric independently without the raw workbook and locally saved large arrays.
+    conda run -n comp8240-ltsf python src/generate_synthetic.py
+    conda run -n comp8240-ltsf python src/audit_synthetic.py
+    conda run -n comp8240-ltsf python src/preprocess_pgcb.py
 
-## Privacy, integrity and access
+Construction scripts also write their documented audits, manifests and figures.
 
-Never commit provider API keys, `.env` files, raw provider workbooks, payment details, model checkpoints or personal temporary archives. The LLM evaluation has concluded; the gold-label `cases.jsonl` manifest was blinded during judging and is included in the curated post-judging release for full offline metric reproducibility. Never reveal it to a future rater before their annotations are collected. Versioned logs and source revisions are evidence; don't silently edit them to match headline results.
+## Separate rerun destinations
 
-Check the public GitHub URL without signing in before final submission and include it in the final report's replication footnote. Do not promise an external user can run full data experiments without obtaining the original input datasets and compatible environment.
+Forecasting examples write under experiments/reruns/, ignored by Git.
+Published evidence remains unchanged. Choose a fresh output directory when
+repeating a completed run.
+
+Training commands below are optional reproduction instructions; they do not
+need to be executed again for submission.
+
+## ETTh1 replication and seed sensitivity
+
+Plan all twelve DLinear sensitivity runs without training:
+
+    conda run -n comp8240-ltsf python tools/run_dlinear_seed_sweep_v1.py --project "$PWD" --seeds 2021,2022,2023 --horizons 96,192,336,720 --output-root "$PWD/experiments/reruns/dlinear_seed_sweep" --dry-run
+
+For actual execution, remove --dry-run.
+Seeds 2021-2023 are three total seeds; seed 2021 repeats the baseline.
+Inspect each run.log and config.json.
+
+Linear/NLinear replication, using separate working directories and logs:
+
+    PROJECT_REPO="$PWD" LOG_DIR="$PWD/experiments/reruns/original_etth1" conda run --no-capture-output -n comp8240-ltsf bash experiments/original_etth1/run_linear_nlinear_etth1.sh
+
+This executes eight runs: two models and four horizons.
+The four DLinear seed-2021 configurations complete the baseline scope.
+The official source remains unchanged.
+
+## All eight synthetic conditions
+
+Plan 24 runs: eight conditions including Stable, three learned models:
+
+    python3 tools/run_synthetic_rerun.py --dry-run
+
+Optional training:
+
+    conda run --no-capture-output -n comp8240-ltsf python tools/run_synthetic_rerun.py --execute
+
+The driver uses official run_longExp.py and its custom-dataset loader:
+seed 2021, input 336, horizon 96, batch 32, LR 0.005, maximum ten epochs,
+patience three. Each run is stored under:
+experiments/reruns/synthetic_all/condition/model.
+
+The historical seven-condition shell runner remains as provenance;
+use the new driver to reproduce all eight conditions.
+
+After training, verify predictions against logs and recompute all 40 evaluations:
+
+    conda run -n comp8240-ltsf python src/verify_synthetic_all_v1.py --run-root "$PWD/experiments/reruns/synthetic_all" --output-dir "$PWD/experiments/reruns/synthetic_check"
+
+Expected: VERIFICATION: PASS, 24 learned-model runs and 16 baseline evaluations.
+Compare the new CSV with results/new_data/synthetic_all_conditions_v1_metrics.csv.
+Scaled and native-unit MSE/MAE are separate fields.
+Without --run-root, the verifier can inspect the historical split layout
+when the local prediction arrays exist.
+
+## PGCB and common-window comparison
+
+PGCB uses adapted loading/training around unchanged official model classes.
+v1 uses complete observed windows; v2 is the post-hoc screening sensitivity.
+
+Audit eligibility without training:
+
+    conda run -n comp8240-ltsf python src/pgcb_valid_window_benchmark_v2.py --project "$PWD" --audit-only
+
+Optional full reproduction:
+
+    conda run --no-capture-output -n comp8240-ltsf python src/pgcb_valid_window_benchmark_v1.py --project "$PWD" --output-dir "$PWD/experiments/reruns/pgcb_v1"
+    conda run --no-capture-output -n comp8240-ltsf python src/pgcb_valid_window_benchmark_v2.py --project "$PWD" --output-dir "$PWD/experiments/reruns/pgcb_v2"
+    conda run -n comp8240-ltsf python src/compare_pgcb_v1_v2.py --project "$PWD" --v1-dir "$PWD/experiments/reruns/pgcb_v1" --v2-dir "$PWD/experiments/reruns/pgcb_v2" --out-prefix experiments/reruns/pgcb_common_window
+
+Each training directory contains protocol.json, metrics.csv and prediction arrays.
+Expected test counts: v1 8,801; v2/common 8,050.
+Compare new metrics against the published CSV summaries.
+
+Repeat is reconstructed from the final value of the saved last-24-hour block.
+The original five-method common-window CSV is preserved. New comparison output
+also includes Repeat, whose report values were previously checked separately.
+
+## Verification and access
+
+Existing fixture checks, without forecasting or paid API calls:
+
+    conda run -n comp8240-ltsf python -m unittest discover -s tests -p test_verified_fixes_v1.py -v
+
+GitHub remains public; a marker needs no collaborator access to read evidence.
+Full forecast reproduction requires external input data and compatible packages.
+Published summaries alone are not sufficient to recompute prediction-level metrics.
+
+Overlapping windows and post-hoc screening do not establish independent or
+causal results. The completed Claude study requires no new calls.
+Historical settings, six parsing failures and valid-response cost scope
+are documented in tools/vlm_judge/README.md.

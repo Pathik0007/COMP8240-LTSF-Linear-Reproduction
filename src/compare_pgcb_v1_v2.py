@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-MODELS = ('Linear', 'NLinear', 'DLinear', 'SeasonalNaive24', 'SeasonalNaive168')
+MODELS = ('Linear', 'NLinear', 'DLinear', 'SeasonalNaive24', 'SeasonalNaive168', 'Repeat')
 PRED_LEN = 96
 
 
@@ -25,8 +25,8 @@ def sha(p):
     return h.hexdigest()
 
 
-def load_run(project, tag):
-    root = project / 'experiments/new_data' / ('pgcb_valid_windows_' + tag)
+def load_run(project, tag, directory=None):
+    root = Path(directory).resolve() if directory else project / 'experiments/new_data' / ('pgcb_valid_windows_' + tag)
     cfg_path = root/'protocol.json'
     cfg = json.loads(cfg_path.read_text())
     if cfg['features'] != ['demand_mw','generation_mw'] or cfg['seq_len'] != 336 or cfg['pred_len'] != PRED_LEN:
@@ -42,7 +42,9 @@ def load_run(project, tag):
         raise RuntimeError(tag + ': duplicate, unsorted or missing test starts')
     if reference.shape != (len(starts), PRED_LEN, 2):
         raise RuntimeError(tag + ': wrong truth shape')
-    preds = {'SeasonalNaive24':seasonal24, 'SeasonalNaive168':seasonal168}
+    # The last-24-hour block ends at index 23, the final input value.
+    preds = {'SeasonalNaive24':seasonal24, 'SeasonalNaive168':seasonal168,
+             'Repeat':np.repeat(seasonal24[:,23:24,:], PRED_LEN, axis=1)}
     for name in MODELS[:3]:
         with np.load(root/(name+'_test_predictions.npz')) as z:
             p=z['prediction_scaled'].astype(np.float64).copy()
@@ -68,9 +70,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--project',type=Path,default=Path.home()/'Documents/COMP8240-LTSF-Linear-Reproduction')
     p.add_argument('--out-prefix',type=Path,default=Path('results/new_data/pgcb_v1_v2_common_window_v1'))
+    p.add_argument('--v1-dir',type=Path,help='Explicit v1 run directory')
+    p.add_argument('--v2-dir',type=Path,help='Explicit v2 run directory')
     a=p.parse_args()
     project=a.project.resolve()
-    runs={x:load_run(project,x) for x in ('v1','v2')}
+    runs={'v1':load_run(project,'v1',a.v1_dir), 'v2':load_run(project,'v2',a.v2_dir)}
     one,two=runs['v1'],runs['v2']
     common,i1,i2=np.intersect1d(one['starts'],two['starts'],return_indices=True)
     if len(common)==0:
@@ -107,7 +111,7 @@ def main():
                   matched_window_first_index=int(common[0]),matched_window_last_index=int(common[-1]),
                   v1_protocol_sha256=sha(one['config_path']),v2_protocol_sha256=sha(two['config_path']),
                   methods=MODELS,warning='Post-hoc screening and selected temporal windows; not independent trials or causal evidence.',
-                  comparison_csv=str(csvpath.relative_to(project)))
+                  comparison_csv=str(csvpath.relative_to(project)) if csvpath.is_relative_to(project) else str(csvpath))
     jsonpath.write_text(json.dumps(manifest,indent=2)+'\n')
     print('PGCB COMMON-WINDOW COMPARISON: PASS',len(common),'windows; max physical truth delta MW',truth_max_difference)
     print('OUTPUTS',csvpath,jsonpath)

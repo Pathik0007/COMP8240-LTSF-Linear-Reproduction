@@ -25,6 +25,7 @@ def main():
     p.add_argument('--batch-size',type=int,default=32)
     p.add_argument('--learning-rate',type=float,default=.005)
     p.add_argument('--dry-run',action='store_true')
+    p.add_argument('--output-root',type=Path,help='Fresh output directory; published evidence is preserved')
     a=p.parse_args()
     official=a.official.resolve();project=a.project.resolve()
     seeds=[int(x) for x in a.seeds.split(',')]
@@ -40,7 +41,7 @@ def main():
     code=entry.read_text()
     if code.count('fix_seed = 2021')!=1:raise RuntimeError('Pinned entry script seed assignment changed')
     if not (official/'dataset/ETTh1.csv').exists():raise RuntimeError('ETTh1.csv not present at '+str(official/'dataset/ETTh1.csv'))
-    outbase=project/'experiments/new_data/dlinear_seed_sweep_v1'
+    outbase=a.output_root.resolve() if a.output_root else project/'experiments/reruns/dlinear_seed_sweep'
     sha=hashlib.sha256(code.encode()).hexdigest()
     runs=[(s,h,outbase/('h{}_seed{}'.format(h,s))) for h in hs for s in seeds]
     print('=== CONTROLLED DLINEAR SEED SWEEP ===')
