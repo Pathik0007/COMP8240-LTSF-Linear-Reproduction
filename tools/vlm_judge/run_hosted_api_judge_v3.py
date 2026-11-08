@@ -63,7 +63,7 @@ def parse_response(s):
             'confidence': confidence, 'reason': reason}
 
 
-def make_request(provider, model, image64):
+def make_request(provider, model, image64, max_tokens):
     if provider == 'openai':
         key = os.getenv('OPENAI_API_KEY')
         if not key: raise RuntimeError('OPENAI_API_KEY is not set')
@@ -71,7 +71,7 @@ def make_request(provider, model, image64):
         headers={'Authorization': 'Bearer '+key}
         payload={
             'model':model, 'temperature':0, 'reasoning_effort':'none',
-            'max_completion_tokens':256, 'response_format':{'type':'json_object'},
+            'max_completion_tokens':max_tokens, 'response_format':{'type':'json_object'},
             'messages':[
                 {'role':'system','content':SYSTEM_PROMPT},
                 {'role':'user','content':[
@@ -86,7 +86,7 @@ def make_request(provider, model, image64):
         url='https://api.anthropic.com/v1/messages'
         headers={'x-api-key':key,'anthropic-version':'2023-06-01'}
         payload={
-            'model':model,'max_tokens':1024,'temperature':0,
+            'model':model,'max_tokens':max_tokens,'temperature':0,
             'system':SYSTEM_PROMPT,
             'messages':[{'role':'user','content':[
                 {'type':'text','text':USER_PROMPT},
@@ -170,11 +170,13 @@ def main():
     p.add_argument('--cases',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--limit',type=int,default=0,help='0 for all remaining; 4 pilot')
+    p.add_argument('--max-tokens',type=int,default=1024,help='Actual output-token limit; historical collection used 256 and 1024')
     p.add_argument('--dry-run',action='store_true')
     p.add_argument('--budget-usd',type=float,default=5.0)
     a=p.parse_args()
     model=a.model or DEFAULT_MODELS[a.provider]
-    if a.limit<0 or a.budget_usd<=0: p.error('limit >=0 and budget-usd >0 required')
+    if a.limit<0 or a.budget_usd<=0 or a.max_tokens<=0:
+        p.error('limit >=0, budget-usd >0 and max-tokens >0 required')
     cases=load_records(a.cases);validate_input(cases,a.cases.parent)
     print('BLIND INPUT VERIFICATION: PASS (144 panels / 72 paired comparisons)',flush=True)
     print('PROVIDER:',a.provider,'MODEL:',model,'PROMPT:',PROMPT_VERSION,flush=True)
@@ -198,7 +200,7 @@ def main():
             print('SPEND LIMIT REACHED; stopping before next case',flush=True);break
         png=(a.cases.parent/case['image']).read_bytes()
         image64=base64.b64encode(png).decode('ascii')
-        url,headers,payload=make_request(a.provider,model,image64)
+        url,headers,payload=make_request(a.provider,model,image64,a.max_tokens)
         started=datetime.datetime.now(datetime.timezone.utc).isoformat()
         response=None; raw=None
         try:
@@ -210,7 +212,7 @@ def main():
             record={'id':case['id'],'base_id':case['base_id'], 'variant':case['variant'],
                     'image_sha256':case['image_sha256'],'provider':a.provider,'model':model,
                     'prompt_version':PROMPT_VERSION,'prompt_sha256':prompt_sha,
-                    'temperature':0,'max_tokens':1024,'completed_at':started,
+                    'temperature':0,'max_tokens':a.max_tokens,'completed_at':started,
                     'raw_response':raw,'parsed':parsed,'valid':True,
                     'response_id':response.get('id'),'served_model':response.get('model'),'usage_input_tokens':inp,
                     'usage_output_tokens':out,'estimated_usd':round(estimate,8)}
