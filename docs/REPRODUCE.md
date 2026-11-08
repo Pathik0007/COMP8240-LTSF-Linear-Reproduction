@@ -1,5 +1,21 @@
 # Reproduce and audit the COMP8240 project
 
+## Quick offline verification
+
+From the repository root:
+
+    python3 tools/verify_submission.py
+
+This uses standard-library Python to recompute every statistical field in the
+final judge summary from committed cases, responses and both annotation batches.
+The two assisted labels are excluded. Machine-specific provenance is excluded
+from the equality check. Temporary outputs are removed automatically.
+
+No Conda environment, external dataset or API key is needed for this check.
+Forecasting stages below have separate data and training dependencies.
+The portable environment YAML omits the original installation prefix and includes
+the Excel reader. Historical platform exports remain original runtime evidence.
+
 ## Prerequisites
 
 1. Obtain the original [LTSF-Linear repository](https://github.com/cure-lab/LTSF-Linear) into `~/Documents/LTSF-Linear`, checkout commit **`0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6`**, and place `ETTh1.csv` at `~/Documents/LTSF-Linear/dataset/ETTh1.csv`. The project code checks this revision for several experiments.

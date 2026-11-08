@@ -2,6 +2,22 @@
 
 This repository contains the code and curated evidence for a COMP8240 research reproduction and extension of Zeng, Chen, Zhang, and Xu, **“Are Transformers Effective for Time Series Forecasting?”** (AAAI 2023, [paper](https://doi.org/10.1609/aaai.v37i9.26317), [official code](https://github.com/cure-lab/LTSF-Linear)). The original implementation used for the project is pinned to commit `0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6` in a **separate checkout**; it is not vendored into this repository.
 
+## Start here
+
+Author: Pathik Ahmed — COMP8240, Macquarie University.
+
+- [Reproduction guide](docs/REPRODUCE.md): prerequisites, commands and limitations.
+- [Experiment interpretation](docs/EXPERIMENTS.md): protocols and findings.
+- [Data index](data/README.md): sources and provenance.
+- [Judge protocol and API evidence](tools/vlm_judge/README.md).
+
+Quick verification using standard-library Python, with no training or API key:
+
+    python3 tools/verify_submission.py
+
+Expected: JUDGE STATISTICS: EXACT MATCH.
+Published results remain unchanged.
+
 ## Scope and completed status
 
 - **Original-paper replication:** ETTh1 multivariate forecasts, Linear/NLinear/DLinear at horizons 96, 192, 336 and 720, look-back 336. These are **12 ETTh1 runs**, not replications of every source-paper dataset. See [`results/comparison_table.csv`](results/comparison_table.csv).

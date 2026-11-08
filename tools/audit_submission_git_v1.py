@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 ALLOWED_EXACT={
+  'environment/environment.yml',
+  'data/README.md',
   'experiments/new_data/vlm_judge_v3/claude46_judgments_errors.jsonl',
   '.gitignore','README.md','tools/vlm_judge/README.md',
   'docs/EXPERIMENTS.md','docs/REPRODUCE.md',

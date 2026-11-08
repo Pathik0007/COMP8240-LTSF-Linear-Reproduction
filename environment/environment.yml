@@ -8,4 +8,6 @@ dependencies:
   - matplotlib=3.5.3
   - numpy=1.21.6
   - scikit-learn=1.0.2
-prefix: /Users/a123456/miniforge3/envs/comp8240-ltsf
+  - pip
+  - pip:
+      - openpyxl==3.1.5
